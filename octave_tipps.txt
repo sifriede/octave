@@ -1,0 +1,13 @@
+Pakete installieren (z.B. optim):
+cmd.exe -> set PATH=C:\Octave\Octave-4.2.1\bin;C:\Octave\Octave-4.2.1\x86_64-w64-mingw32\bin
+            -> octave-cli
+            -> pkg list
+            -> pkg install -forge optim
+            
+Strings:
+        -> Kein Underscore/Supscript: title('This_title has an underline', 'Interpreter', 'none'); % Also works with xlabel() and ylabel()
+        
+1-Zeilen Funktion:
+    f = @(x, n = 1) n*x+x*sin(n*x);
+    f(2)
+    f(2,2)
