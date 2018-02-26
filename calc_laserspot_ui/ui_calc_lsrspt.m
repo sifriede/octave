@@ -81,9 +81,10 @@ function update_plot (obj, init = false)
         case {h.pixel2mm_default}
             pixel2mm = 4.8/1280;
             recalc = true;
-        case {h.pixel2mm_edit}
-            set(h.pixel2mm_default, "value", 0)
-            pixel2mm = str2num(get (gcbo, "string"));
+        case {h.pixel2mm_pi}
+            #set(h.pixel2mm_default, "value", 0)
+            #pixel2mm = str2num(get (gcbo, "string"));
+            pixel2mm = 3.76/2592;
             recalc = true;
     endswitch
 
@@ -246,12 +247,12 @@ h.close_pushbutton = uicontrol ("style", "pushbutton",
 
 
 ## Pixel2mm
-h.pixel2mm_label = uicontrol ("style", "text",
-                               "units", "normalized",
-                               "string", "Pixel to mm:",
-                               "handlevisibility", "off",
-                               "horizontalalignment", "left",
-                               "position", [0.17 0.1 0.18 0.02]);
+#h.pixel2mm_label = uicontrol ("style", "text",
+#                               "units", "normalized",
+#                               "string", "Pixel to mm:",
+#                               "handlevisibility", "off",
+#                               "horizontalalignment", "left",
+#                               "position", [0.17 0.1 0.18 0.02]);
 
 h.pixel2mm_default = uicontrol ("style", "pushbutton",
                                 "units", "normalized",
@@ -260,13 +261,21 @@ h.pixel2mm_default = uicontrol ("style", "pushbutton",
                                 "callback", @update_plot,
                                 "value", 1,
                                 "position", [0.01 0.06 0.16 0.06]);
+                                
+h.pixel2mm_pi = uicontrol ("style", "pushbutton",
+                                "units", "normalized",
+                                "string", "Pi sensor \n  3.8 mm / 2592 px",
+                                "handlevisibility", "off",
+                                "callback", @update_plot,
+                                "value", 0,
+                                "position", [0.17 0.06 0.16 0.06]);
                                
-h.pixel2mm_edit = uicontrol ("style", "edit",
-                             "units", "normalized",
-                             "string", num2str(pixel2mm),
-                             "handlevisibility", "off",
-                             "callback", @update_plot,
-                             "position", [0.17 0.06 0.15 0.03]);
+%h.pixel2mm_edit = uicontrol ("style", "edit",
+%                             "units", "normalized",
+%                             "string", num2str(pixel2mm),
+%                             "handlevisibility", "off",
+%                             "callback", @update_plot,
+%                             "position", [0.17 0.06 0.15 0.03]);
                              
 set (gcf, "color", get(0, "defaultuicontrolbackgroundcolor"))
 guidata (gcf, h)
